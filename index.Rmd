@@ -14,6 +14,8 @@ description: "This is a minimal example of using the bookdown package to write a
 
 # Prerequisites
 
+blah blah blah
+
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
 
 The **bookdown** package can be installed from CRAN or Github:
