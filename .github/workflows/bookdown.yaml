@@ -69,15 +69,11 @@ jobs:
       - name: Deploy to gh-pages
         working-directory: ${{env.BOOKDOWN_OUTPUT_PATH}}
         run: |
-          #cd $BOOKDOWN_OUTPUT_PATH
-          pwd
-          #ls
           git add -A .
           git commit --allow-empty -m "GHA render of ${GITHUB_SHA::8}"
           git push --force origin HEAD:gh-pages
 
       - name: Clean up
         run: |
-          pwd
           git worktree remove $BOOKDOWN_OUTPUT_PATH
           rm -rf $BOOKDOWN_OUTPUT_PATH
