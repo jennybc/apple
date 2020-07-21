@@ -71,11 +71,11 @@ jobs:
           Rscript -e 'writeLines("", con = file.path(Sys.getenv("BOOKDOWN_OUTPUT_DIR"), ".nojekyll"))'
 
       - name: Deploy to gh-pages
+        working-directory:  $BOOKDOWN_OUTPUT_DIR
         run: |
           git add -A .
           git commit --allow-empty -m "GHA render"
           git push --force origin HEAD:gh-pages
-          # working directory!
 
       - name: Clean up
         run: |
