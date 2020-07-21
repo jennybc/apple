@@ -77,7 +77,7 @@ jobs:
           pwd
           ls
           git add -A .
-          git commit --allow-empty -m "GHA render"
+          git commit --allow-empty -m "GHA render of ${GITHUB_SHA::8}"
           git push --force origin HEAD:gh-pages
 
       - name: Clean up
