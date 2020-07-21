@@ -66,11 +66,11 @@ jobs:
       - name: Build site
         run: |
           Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE, output_dir = Sys.getenv("BOOKDOWN_OUTPUT_PATH"))'
-          Rscript -e 'writeLines("", con = file.path(Sys.getenv("BOOKDOWN_OUTPUT_PATH"), ".nojekyll"))'
 
       - name: Deploy to gh-pages
         working-directory: ${{env.BOOKDOWN_OUTPUT_PATH}}
         run: |
+          touch .nojekyll
           git add -A .
           git commit --allow-empty -m "GHA render of ${GITHUB_SHA::8}"
           git push --force origin gh-pages
