@@ -56,6 +56,7 @@ jobs:
       - name: Sanity check
         run: |
           echo BOOKDOWN_OUTPUT_DIR = $BOOKDOWN_OUTPUT_DIR
+          ls $BOOKDOWN_OUTPUT_DIR
 
       - name: Git prep
         run: |
@@ -71,8 +72,10 @@ jobs:
           Rscript -e 'writeLines("", con = file.path(Sys.getenv("BOOKDOWN_OUTPUT_DIR"), ".nojekyll"))'
 
       - name: Deploy to gh-pages
-        working-directory:  $BOOKDOWN_OUTPUT_DIR
+        working-directory: $BOOKDOWN_OUTPUT_DIR
         run: |
+          pwd
+          ls
           git add -A .
           git commit --allow-empty -m "GHA render"
           git push --force origin HEAD:gh-pages
