@@ -51,12 +51,12 @@ jobs:
       - name: Create a temporary directory to render in
         run: |
           DIR=$(mktemp -d)
-          echo "::set-env name=BOOKDOWN_OUTPUT_DIR::$DIR"
+          echo "::set-env name=BOOKDOWN_OUTPUT_PATH::$DIR"
 
       - name: Sanity check
         run: |
-          echo BOOKDOWN_OUTPUT_DIR = $BOOKDOWN_OUTPUT_DIR
-          ls $BOOKDOWN_OUTPUT_DIR
+          echo BOOKDOWN_OUTPUT_PATH = $BOOKDOWN_OUTPUT_PATH
+          ls $BOOKDOWN_OUTPUT_PATH
 
       - name: Git prep
         run: |
@@ -64,16 +64,16 @@ jobs:
           git config --local user.name "GitHub Actions"
           git remote set-branches origin gh-pages
           git fetch origin gh-pages
-          git worktree add --track -B gh-pages $BOOKDOWN_OUTPUT_DIR origin/gh-pages
+          git worktree add --track -B gh-pages $BOOKDOWN_OUTPUT_PATH origin/gh-pages
 
       - name: Build site
         run: |
-          Rscript -e 'bookdown::render_book("index.Rmd", quiet = FALSE, output_dir = Sys.getenv("BOOKDOWN_OUTPUT_DIR"))'
-          Rscript -e 'writeLines("", con = file.path(Sys.getenv("BOOKDOWN_OUTPUT_DIR"), ".nojekyll"))'
+          Rscript -e 'bookdown::render_book("index.Rmd", quiet = FALSE, output_dir = Sys.getenv("BOOKDOWN_OUTPUT_PATH"))'
+          Rscript -e 'writeLines("", con = file.path(Sys.getenv("BOOKDOWN_OUTPUT_PATH"), ".nojekyll"))'
 
       - name: Deploy to gh-pages
         run: |
-          cd $BOOKDOWN_OUTPUT_DIR
+          cd $BOOKDOWN_OUTPUT_PATH
           pwd
           ls
           git add -A .
@@ -83,5 +83,5 @@ jobs:
       - name: Clean up
         run: |
           pwd
-          git worktree remove $BOOKDOWN_OUTPUT_DIR
-          rm -rf $BOOKDOWN_OUTPUT_DIR
+          git worktree remove $BOOKDOWN_OUTPUT_PATH
+          rm -rf $BOOKDOWN_OUTPUT_PATH
