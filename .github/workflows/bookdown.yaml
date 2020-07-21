@@ -78,4 +78,3 @@ jobs:
       - name: Clean up
         run: |
           git worktree remove $BOOKDOWN_OUTPUT_PATH
-          rm -rf $BOOKDOWN_OUTPUT_PATH
