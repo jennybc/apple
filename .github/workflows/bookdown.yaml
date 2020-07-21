@@ -48,7 +48,7 @@ jobs:
           install.packages("bookdown")
         shell: Rscript {0}
 
-     - name: Create a temporary directory to render in
+      - name: Create a temporary directory to render in
         run: |
           DIR=$(mktemp -d)
           echo "::set-env name=BOOKDOWN_OUTPUT_DIR::$DIR"
@@ -63,7 +63,7 @@ jobs:
           git config --local user.name "GitHub Actions"
           #git remote set-branches origin gh-pages
           #git fetch origin gh-pages
-          #git worktree add --track -B gh-pages $(BOOKDOWN_OUTPUT_DIR) origin/gh-pages
+          #git worktree add --track -B gh-pages $BOOKDOWN_OUTPUT_DIR origin/gh-pages
 
 
       - name: Build site
