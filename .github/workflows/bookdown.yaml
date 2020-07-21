@@ -5,7 +5,7 @@ on:
 name: bookdown
 
 jobs:
-  build:
+  bookdown:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -52,11 +52,6 @@ jobs:
         run: |
           DIR=$(mktemp -d)
           echo "::set-env name=BOOKDOWN_OUTPUT_PATH::$DIR"
-
-      - name: Sanity check
-        run: |
-          echo BOOKDOWN_OUTPUT_PATH = $BOOKDOWN_OUTPUT_PATH
-          ls $BOOKDOWN_OUTPUT_PATH
 
       - name: Git prep
         run: |
