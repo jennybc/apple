@@ -14,7 +14,7 @@ description: "This is a minimal example of using the bookdown package to write a
 
 # Prerequisites
 
-Yada yada yada.
+Bacon ipsum dolor amet pork belly porchetta andouille pig, tri-tip beef ribs alcatra kielbasa shankle.
 
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
 

@@ -60,8 +60,7 @@ jobs:
 
       - name: Git prep
         run: |
-          git remote set-branches origin gh-pages
-          git fetch origin gh-pages
+          git fetch origin +refs/heads/gh-pages:refs/remotes/origin/gh-pages
           git worktree add --track -B gh-pages $BOOKDOWN_OUTPUT_PATH origin/gh-pages
 
       - name: Build site
@@ -74,7 +73,7 @@ jobs:
         run: |
           git add -A .
           git commit --allow-empty -m "GHA render of ${GITHUB_SHA::8}"
-          git push --force origin HEAD:gh-pages
+          git push --force origin gh-pages
 
       - name: Clean up
         run: |
