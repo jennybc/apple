@@ -60,7 +60,9 @@ jobs:
 
       - name: Git prep
         run: |
-          git fetch origin +refs/heads/gh-pages:refs/remotes/origin/gh-pages
+          git branch -vv
+          git fetch --no-tags origin +refs/heads/gh-pages:refs/remotes/origin/gh-pages
+          #git fetch --no-tags --prune --depth=1 origin gh-pages
           git worktree add --track -B gh-pages $BOOKDOWN_OUTPUT_PATH origin/gh-pages
 
       - name: Build site
@@ -71,11 +73,10 @@ jobs:
         working-directory: ${{env.BOOKDOWN_OUTPUT_PATH}}
         run: |
           touch .nojekyll
-          git add -A .
+          git add --all
           git commit --allow-empty -m "GHA render of ${GITHUB_SHA::8}"
           git push --force origin gh-pages
 
       - name: Clean up
         run: |
           git worktree remove $BOOKDOWN_OUTPUT_PATH
-          rm -rf $BOOKDOWN_OUTPUT_PATH
