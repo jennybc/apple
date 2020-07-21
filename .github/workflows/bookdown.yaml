@@ -72,8 +72,8 @@ jobs:
           Rscript -e 'writeLines("", con = file.path(Sys.getenv("BOOKDOWN_OUTPUT_DIR"), ".nojekyll"))'
 
       - name: Deploy to gh-pages
-        working-directory: $BOOKDOWN_OUTPUT_DIR
         run: |
+          cd $BOOKDOWN_OUTPUT_DIR
           pwd
           ls
           git add -A .
@@ -82,5 +82,6 @@ jobs:
 
       - name: Clean up
         run: |
+          pwd
           git worktree remove $BOOKDOWN_OUTPUT_DIR
           rm -rf $BOOKDOWN_OUTPUT_DIR
