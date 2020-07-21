@@ -48,6 +48,11 @@ jobs:
           install.packages("bookdown")
         shell: Rscript {0}
 
+      - name: Configure Git
+        run: |
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
       - name: Create a temporary directory to render in
         run: |
           DIR=$(mktemp -d)
@@ -55,8 +60,6 @@ jobs:
 
       - name: Git prep
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
           git remote set-branches origin gh-pages
           git fetch origin gh-pages
           git worktree add --track -B gh-pages $BOOKDOWN_OUTPUT_PATH origin/gh-pages
