@@ -56,7 +56,6 @@ jobs:
       - name: Ensure origin/gh-pages exists
         run: |
           if ! git ls-remote --exit-code --heads origin gh-pages; then
-          steps:
             ORIG_BRANCH=${{github.ref}}
             git checkout --orphan gh-pages
             git rm -rf --quiet .
