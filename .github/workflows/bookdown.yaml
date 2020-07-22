@@ -56,12 +56,11 @@ jobs:
       - name: Ensure origin/gh-pages exists
         run: |
           if ! git ls-remote --exit-code --heads origin gh-pages; then
-            ORIG_BRANCH=${{github.ref}}
             git checkout --orphan gh-pages
             git reset --hard
             git commit --allow-empty -m "Initializing gh-pages branch"
             git push origin gh-pages
-            git checkout $ORIG_BRANCH
+            git checkout master
           fi
 
       - name: Create a temporary directory to render in
