@@ -60,6 +60,7 @@ jobs:
             git rm -rf --quiet .
             git commit --allow-empty -m "Initializing gh-pages branch"
             git push origin gh-pages
+            git checkout master
           fi
 
       - name: Create a temporary directory to render in
@@ -72,7 +73,7 @@ jobs:
           git branch -vv
           git fetch --no-tags origin +refs/heads/gh-pages:refs/remotes/origin/gh-pages
           #git fetch --no-tags --prune --depth=1 origin gh-pages
-          git worktree add --force --track -B gh-pages $BOOKDOWN_OUTPUT_PATH origin/gh-pages
+          git worktree add --track -B gh-pages $BOOKDOWN_OUTPUT_PATH origin/gh-pages
 
       - name: Build site
         run: |
