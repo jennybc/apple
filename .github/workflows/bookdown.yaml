@@ -53,6 +53,15 @@ jobs:
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
+      - name: Ensure origin/gh-pages exists
+        run: |
+          if ! git ls-remote --exit-code --heads origin gh-pages; then
+            git checkout --orphan gh-pages
+            git rm -rf --quiet .
+            git commit --allow-empty -m "Initializing gh-pages branch"
+            git push origin gh-pages
+          fi
+
       - name: Create a temporary directory to render in
         run: |
           DIR=$(mktemp -d)
